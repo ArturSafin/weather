@@ -18,7 +18,7 @@
     <script>
         async function updateWeather() {
             try {
-                const response = await fetch('ВАШ_API_URL/weather-data'); // Замените на URL вашего API
+                const response = await fetch('cf9fbbfa6d554a4e9dd152232252303/weather-data');
                 const data = await response.json();
 
                 document.getElementById('perm-weather').innerText = `Пермь ${data.perm_time} Температура: ${data.perm_temp}°C`;
