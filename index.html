@@ -6,36 +6,54 @@
     <title>Погода</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
         }
     </style>
+    <script>
+   
+        async function updateWeather() {
+            try {
+            
+                const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
+                const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
+                const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
+
+        
+                const permResponse = await fetch(permUrl);
+                const permData = await permResponse.json();
+
+           
+                const kurdymResponse = await fetch(kurdymUrl);
+                const kurdymData = await kurdymResponse.json();
+
+       
+                document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
+                document.getElementById('kurdym-weather').innerText = `Курыдм ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
+            } catch (error) {
+                console.error('Ошибка при обновлении данных:', error);
+            }
+        }
+
+        setInterval(updateWeather, 300000);
+
+        window.onload = updateWeather;
+    </script>
 </head>
 <body>
     <h1>Погода в городах</h1>
     <p id="perm-weather">Загрузка данных...</p>
     <p id="kurdym-weather">Загрузка данных...</p>
-
-    <script>
-        async function updateWeather() {
-            try {
-                const response = await fetch('cf9fbbfa6d554a4e9dd152232252303/weather-data');
-                const data = await response.json();
-
-                document.getElementById('perm-weather').innerText = `Пермь ${data.perm_time} Температура: ${data.perm_temp}°C`;
-                document.getElementById('kurdym-weather').innerText = `Курыдым ${data.kurdym_time} Температура: ${data.kurdym_temp}°C`;
-            } catch (error) {
-                console.error('Ошибка при обновлении данных:', error);
-                document.getElementById('perm-weather').innerText = 'Ошибка при загрузке данных.';
-                document.getElementById('kurdym-weather').innerText = 'Ошибка при загрузке данных.';
-            }
-        }
-
-        // Обновление данных каждые 5 минут (300000 миллисекунд)
-        setInterval(updateWeather, 300000);
-
-        // Запуск обновления при загрузке страницы
-        window.onload = updateWeather;
-    </script>
 </body>
 </html>
+
+
 
