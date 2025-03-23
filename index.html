@@ -9,25 +9,32 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-image: url('back.jpg');
         }
+
         h1 {
             color: #333;
+            font-size: 150px;
+            font-weight: 1000;
         }
         p {
-            font-size: 1.2em;
+
+            font-size: 70px;
             color: #555;
+            line-height: 100px;
+            font-weight: 900; 
         }
     </style>
     <script>
-   
+      
         async function updateWeather() {
             try {
-            
+           
                 const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
                 const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
                 const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
 
-        
+           
                 const permResponse = await fetch(permUrl);
                 const permData = await permResponse.json();
 
@@ -43,17 +50,21 @@
             }
         }
 
+    
         setInterval(updateWeather, 300000);
 
+     
         window.onload = updateWeather;
     </script>
 </head>
 <body>
-    <h1>Погода в городах</h1>
+    <h1>Погода</h1>
     <p id="perm-weather">Загрузка данных...</p>
     <p id="kurdym-weather">Загрузка данных...</p>
 </body>
 </html>
+
+
 
 
 
