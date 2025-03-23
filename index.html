@@ -1,72 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Погода</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-         
+            margin-top: 30px;
             background-image: url('back.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-           
-            display: flex;
-      
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         h1 {
             color: #333;
-            font-size: 8vw;
-          
+            font-size: 80px;
             font-weight: 1000;
-            margin: 20px 0;
         }
-
         p {
-            font-size: 4vw;
-          
-            color: #555;
-            line-height: 1.2;
-          
-            font-weight: 900;
-            margin: 15px 0;
-        }
-    </style>
 
+            font-size: 50px;
+            color: #555;
+            line-height: 60px;
+            font-weight: 900; 
+        }
     </style>
     <script>
-
+      
         async function updateWeather() {
             try {
-
+           
                 const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
                 const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
                 const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
 
-
+           
                 const permResponse = await fetch(permUrl);
                 const permData = await permResponse.json();
 
-
+           
                 const kurdymResponse = await fetch(kurdymUrl);
                 const kurdymData = await kurdymResponse.json();
 
-
+       
                 document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
                 document.getElementById('kurdym-weather').innerText = `Курдым ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
             } catch (error) {
@@ -74,22 +50,19 @@
             }
         }
 
-
+    
         setInterval(updateWeather, 300000);
 
-
+     
         window.onload = updateWeather;
     </script>
 </head>
-
 <body>
     <h1>Погода</h1>
     <p id="perm-weather">Загрузка данных...</p>
     <p id="kurdym-weather">Загрузка данных...</p>
 </body>
-
 </html>
-
 
 
 
