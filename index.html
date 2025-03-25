@@ -18,52 +18,119 @@
             font-size: 80px;
             font-weight: 1000;
         }
-        p {
 
+        p {
             font-size: 50px;
             color: #555;
             line-height: 60px;
-            font-weight: 900; 
+            font-weight: 900;
+        }
+
+        #greeting {
+            font-size: 40px;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+
+        .input-container {
+            margin: 20px 0;
+            display: block; 
+        }
+
+        input {
+            padding: 10px;
+            font-size: 24px;
+            border: 2px solid #2c3e50;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 24px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .weather-data {
+            display: none; 
         }
     </style>
-    <script>
-      
-        async function updateWeather() {
-            try {
-           
-                const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
-                const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
-                const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
-
-           
-                const permResponse = await fetch(permUrl);
-                const permData = await permResponse.json();
-
-           
-                const kurdymResponse = await fetch(kurdymUrl);
-                const kurdymData = await kurdymResponse.json();
-
-       
-                document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
-                document.getElementById('kurdym-weather').innerText = `Курдым ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
-            } catch (error) {
-                console.error('Ошибка при обновлении данных:', error);
-            }
-        }
-
-    
-        setInterval(updateWeather, 300000);
-
-     
-        window.onload = updateWeather;
-    </script>
 </head>
+
 <body>
-    <h1>Погода</h1>
-    <p id="perm-weather">Загрузка данных...</p>
-    <p id="kurdym-weather">Загрузка данных...</p>
+    <div class="input-container">
+        <input type="text" id="nameInput" placeholder="Введите ваше имя...">
+        <button onclick="saveName()">Сохранить</button>
+    </div>
+
+    <div class="weather-data">
+        <h1>Погода</h1>
+        <p id="greeting">Загрузка данных...</p>
+        <p id="perm-weather">Загрузка данных...</p>
+        <p id="kurdym-weather">Загрузка данных...</p>
+    </div>
+
+<script>
+
+    function saveName() {
+        const name = document.getElementById('nameInput').value.trim();
+        if (name) {
+            localStorage.setItem('user_name', name);
+            updateGreeting();
+            document.querySelector('.input-container').style.display = 'none';
+            document.querySelector('.weather-data').style.display = 'block';
+            updateWeather();
+        }
+    }
+
+
+    function updateGreeting() {
+        const name = localStorage.getItem('user_name');
+        const greetingText = name 
+            ? `Добрый день, ${name}! Сегодня ваш день начнётся с...`
+            : 'Загрузка данных...';
+        
+        document.getElementById('greeting').textContent = greetingText;
+    }
+
+
+    window.onload = function() {
+        if (localStorage.getItem('user_name')) {
+            document.querySelector('.input-container').style.display = 'none';
+            document.querySelector('.weather-data').style.display = 'block';
+            updateGreeting();
+            updateWeather();
+        }
+    };
+
+ 
+    async function updateWeather() {
+        try {
+            const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
+            const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
+            const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
+
+            const permResponse = await fetch(permUrl);
+            const permData = await permResponse.json();
+
+            const kurdymResponse = await fetch(kurdymUrl);
+            const kurdymData = await kurdymResponse.json();
+
+            document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
+            document.getElementById('kurdym-weather').innerText = `Курдым ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
+        } catch (error) {
+            console.error('Ошибка при обновлении данных:', error);
+        }
+    }
+
+    setInterval(updateWeather, 300000);
+</script>
 </body>
 </html>
+
 
 
 
