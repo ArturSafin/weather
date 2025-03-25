@@ -1,102 +1,40 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Погода</title>
     <link rel="icon" href="icon.jpg" type="jpg">
-    <style>
-        body {
-            font-family: Impact, sans-serif;
-            font-size: 30px;
-            margin: 100;
-            background: url('back.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #2F4F4F;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-top: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-weight: bold;
-        }
-
-        #greeting {
-            font-size: 1.5em;
-            margin: 10px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        p {
-            font-size: 1.2em;
-            margin: 5px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .weather-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            width: 100%;
-            max-width: 700px;
-            margin-bottom: 10px;
-        }
-
-        .input-container {
-            margin: 20px 0;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #00ee8f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #6DD58C;
-        }
-    </style>
 </head>
-<body>
-    <div class="input-container">
-        <input type="text" id="nameInput" placeholder="Введите ваше имя...">
-        <button onclick="saveName()">Сохранить</button>
+
+<body
+    style="font-family: Impact, sans-serif; font-size: 30px; margin: 0; background: url('back.jpg') no-repeat center center fixed; background-size: cover; color: #2F4F4F; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+    <div class="input-container" style="margin: 20px 0;">
+        <input type="text" id="nameInput" placeholder="Введите ваше имя..."
+            style="padding: 10px; font-size: 1em; border: none; border-radius: 5px; margin-right: 10px; background-color: rgba(255, 255, 255, 0.7);">
+        <button onclick="saveName()"
+            style="padding: 10px 20px; font-size: 1em; background-color: #00ee8f; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">Сохранить</button>
     </div>
 
-    <div class="weather-container" id = "greeting-container" style="display:none;">
-        <h1 >Погода</h1>
-        <p id="greeting">Загрузка данных...</p>
+    <div class="weather-container" id="greeting-container"
+        style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 2.5em; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold;">
+            Погода</h1>
+        <p id="greeting" style="font-size: 1.5em; margin: 10px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Загрузка
+            данных...</p>
     </div>
 
-    <div class="weather-container" id = "perm-container" style="display:none;">
-        <p id="perm-weather">Загрузка данных...</p>
+    <div class="weather-container" id="perm-container"
+        style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <p id="perm-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
+            Загрузка данных...</p>
     </div>
 
-     <div class="weather-container" id = "kurdym-container" style="display:none;">
-        <p id="kurdym-weather">Загрузка данных...</p>
+    <div class="weather-container" id="kurdym-container"
+        style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <p id="kurdym-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
+            Загрузка данных...</p>
     </div>
 
     <script>
@@ -116,13 +54,13 @@
         function updateGreeting() {
             const name = localStorage.getItem('user_name');
             const greetingText = name
-                ? `Добрый день, ${name}! Сегодня ваш день начнётся с:`
+                ? `Добрый день, ${name}! Сегодня ваш день начнётся сЖ`
                 : 'Загрузка данных...';
 
             document.getElementById('greeting').textContent = greetingText;
         }
 
-        window.onload = function() {
+        window.onload = function () {
             if (localStorage.getItem('user_name')) {
                 document.querySelector('.input-container').style.display = 'none';
                 document.getElementById('greeting-container').style.display = 'block';
@@ -154,7 +92,25 @@
 
         setInterval(updateWeather, 300000);
     </script>
+    <style>
+        @media (max-width: 768px) {
+            body {
+                font-size: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            #greeting {
+                font-size: 1.2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
 </body>
+
 </html>
-
-
