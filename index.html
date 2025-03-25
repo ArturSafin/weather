@@ -90,7 +90,7 @@
     function updateGreeting() {
         const name = localStorage.getItem('user_name');
         const greetingText = name 
-            ? `Добрый день, ${name}! Сегодня ваш день начнётся с...`
+            ? `Добрый день, ${name}! Сегодня ваш день начнется с`
             : 'Загрузка данных...';
         
         document.getElementById('greeting').textContent = greetingText;
