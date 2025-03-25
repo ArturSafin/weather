@@ -7,131 +7,154 @@
     <link rel="icon" href="icon.jpg" type="jpg">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 30px;
-            background-image: url('back.jpg');
+            font-family: Impact, sans-serif;
+            font-size: 30px;
+            margin: 100;
+            background: url('back.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #2F4F4F;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }
 
         h1 {
-            color: #333;
-            font-size: 80px;
-            font-weight: 1000;
-        }
-
-        p {
-            font-size: 50px;
-            color: #555;
-            line-height: 60px;
-            font-weight: 900;
+            font-size: 2.5em;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
         }
 
         #greeting {
-            font-size: 40px;
-            margin: 20px 0;
-            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 5px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .weather-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 10px;
         }
 
         .input-container {
             margin: 20px 0;
-            display: block; 
         }
 
-        input {
+        input[type="text"] {
             padding: 10px;
-            font-size: 24px;
-            border: 2px solid #2c3e50;
+            font-size: 1em;
+            border: none;
             border-radius: 5px;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
         }
 
         button {
             padding: 10px 20px;
-            font-size: 24px;
-            background-color: #2c3e50;
+            font-size: 1em;
+            background-color: #00ee8f;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .weather-data {
-            display: none; 
+        button:hover {
+            background-color: #6DD58C;
         }
     </style>
 </head>
-
 <body>
     <div class="input-container">
         <input type="text" id="nameInput" placeholder="Введите ваше имя...">
         <button onclick="saveName()">Сохранить</button>
     </div>
 
-    <div class="weather-data">
-        <h1>Погода</h1>
+    <div class="weather-container" id = "greeting-container" style="display:none;">
+        <h1 >Погода</h1>
         <p id="greeting">Загрузка данных...</p>
+    </div>
+
+    <div class="weather-container" id = "perm-container" style="display:none;">
         <p id="perm-weather">Загрузка данных...</p>
+    </div>
+
+     <div class="weather-container" id = "kurdym-container" style="display:none;">
         <p id="kurdym-weather">Загрузка данных...</p>
     </div>
 
-<script>
-
-    function saveName() {
-        const name = document.getElementById('nameInput').value.trim();
-        if (name) {
-            localStorage.setItem('user_name', name);
-            updateGreeting();
-            document.querySelector('.input-container').style.display = 'none';
-            document.querySelector('.weather-data').style.display = 'block';
-            updateWeather();
+    <script>
+        function saveName() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name) {
+                localStorage.setItem('user_name', name);
+                updateGreeting();
+                document.querySelector('.input-container').style.display = 'none';
+                document.getElementById('greeting-container').style.display = 'block';
+                document.getElementById('perm-container').style.display = 'block';
+                document.getElementById('kurdym-container').style.display = 'block';
+                updateWeather();
+            }
         }
-    }
 
+        function updateGreeting() {
+            const name = localStorage.getItem('user_name');
+            const greetingText = name
+                ? `Добрый день, ${name}! Сегодня ваш день начнётся сЖ`
+                : 'Загрузка данных...';
 
-    function updateGreeting() {
-        const name = localStorage.getItem('user_name');
-        const greetingText = name 
-            ? `Добрый день, ${name}! Сегодня ваш день начнется с`
-            : 'Загрузка данных...';
-        
-        document.getElementById('greeting').textContent = greetingText;
-    }
-
-
-    window.onload = function() {
-        if (localStorage.getItem('user_name')) {
-            document.querySelector('.input-container').style.display = 'none';
-            document.querySelector('.weather-data').style.display = 'block';
-            updateGreeting();
-            updateWeather();
+            document.getElementById('greeting').textContent = greetingText;
         }
-    };
 
- 
-    async function updateWeather() {
-        try {
-            const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
-            const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
-            const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
+        window.onload = function() {
+            if (localStorage.getItem('user_name')) {
+                document.querySelector('.input-container').style.display = 'none';
+                document.getElementById('greeting-container').style.display = 'block';
+                document.getElementById('perm-container').style.display = 'block';
+                document.getElementById('kurdym-container').style.display = 'block';
+                updateGreeting();
+                updateWeather();
+            }
+        };
 
-            const permResponse = await fetch(permUrl);
-            const permData = await permResponse.json();
+        async function updateWeather() {
+            try {
+                const apiKey = "cf9fbbfa6d554a4e9dd152232252303";
+                const permUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Perm&aqi=no`;
+                const kurdymUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=56.25941,55.48913&aqi=no`;
 
-            const kurdymResponse = await fetch(kurdymUrl);
-            const kurdymData = await kurdymResponse.json();
+                const permResponse = await fetch(permUrl);
+                const permData = await permResponse.json();
 
-            document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
-            document.getElementById('kurdym-weather').innerText = `Курдым ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
-        } catch (error) {
-            console.error('Ошибка при обновлении данных:', error);
+                const kurdymResponse = await fetch(kurdymUrl);
+                const kurdymData = await kurdymResponse.json();
+
+                document.getElementById('perm-weather').innerText = `Пермь ${permData.location.localtime} Температура: ${permData.current.temp_c}°C`;
+                document.getElementById('kurdym-weather').innerText = `Курдым ${kurdymData.location.localtime} Температура: ${kurdymData.current.temp_c}°C`;
+            } catch (error) {
+                console.error('Ошибка при обновлении данных:', error);
+            }
         }
-    }
 
-    setInterval(updateWeather, 300000);
-</script>
+        setInterval(updateWeather, 300000);
+    </script>
 </body>
 </html>
-
-
-
 
 
