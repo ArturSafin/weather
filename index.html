@@ -21,20 +21,19 @@
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
         <h1 id="weather-title" style="font-size: 2.5em; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold;">
             Погода</h1>
-        <p id="greeting" style="font-size: 1.5em; margin: 10px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Загрузка
-            данных...</p>
+        <p id="greeting" style="font-size: 1.5em; margin: 10px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Добрый день, Артур! Сегодня ваш день начнётся с:</p>
     </div>
 
     <div class="weather-container" id="perm-container"
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <p id="perm-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
-            Пермь: Загрузка данных...</p>
+        <p id="perm-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Пермь
+            2025-03-25 16:38 Температура: 6.4°C</p>
     </div>
 
     <div class="weather-container" id="kurdym-container"
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <p id="kurdym-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
-            Курдым: Загрузка данных...</p>
+        <p id="kurdym-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Курдым
+            2025-03-25 16:34 Температура: 0.8°C</p>
     </div>
 
     <script>
@@ -94,24 +93,11 @@
     </script>
     <style>
         @media (max-width: 768px) {
-            body {
-                font-size: 20px;
-            }
-
             #weather-title {
-                font-size: 2em; 
-            }
-
-            #greeting {
-                font-size: 1.2em;
-            }
-
-            p {
-                font-size: 1em;
+                font-size: 2.2em; /* Только чуть-чуть уменьшаем */
             }
         }
     </style>
 </body>
 
 </html>
-
