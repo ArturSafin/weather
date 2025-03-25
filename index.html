@@ -19,7 +19,7 @@
 
     <div class="weather-container" id="greeting-container"
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <h1 style="font-size: 2.5em; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold;">
+        <h1 id="weather-title" style="font-size: 2.5em; margin-top: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold;">
             Погода</h1>
         <p id="greeting" style="font-size: 1.5em; margin: 10px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Загрузка
             данных...</p>
@@ -28,13 +28,13 @@
     <div class="weather-container" id="perm-container"
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
         <p id="perm-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
-            Загрузка данных...</p>
+            Пермь: Загрузка данных...</p>
     </div>
 
     <div class="weather-container" id="kurdym-container"
         style="display:none; background-color: rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); width: 80%; max-width: 700px; margin-bottom: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
         <p id="kurdym-weather" style="font-size: 1.2em; margin: 5px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">
-            Загрузка данных...</p>
+            Курдым: Загрузка данных...</p>
     </div>
 
     <script>
@@ -54,7 +54,7 @@
         function updateGreeting() {
             const name = localStorage.getItem('user_name');
             const greetingText = name
-                ? `Добрый день, ${name}! Сегодня ваш день начнётся сЖ`
+                ? `Добрый день, ${name}! Сегодня ваш день начнётся с:`
                 : 'Загрузка данных...';
 
             document.getElementById('greeting').textContent = greetingText;
@@ -98,8 +98,8 @@
                 font-size: 20px;
             }
 
-            h1 {
-                font-size: 2em;
+            #weather-title {
+                font-size: 2em; 
             }
 
             #greeting {
@@ -114,3 +114,4 @@
 </body>
 
 </html>
+
